@@ -1,0 +1,38 @@
+#!/bin/sh
+
+#
+# Script for accessing knowledge file.
+#
+#
+
+OPTIND=1
+
+editFile()
+{
+	vim ~/files/txt/KNOWLEDGE.txt
+	cd ~/files
+	grive
+	cd -
+}
+
+readFile()
+{
+	vim ~/files/txt/KNOWLEDGE.txt
+}
+
+if [ ! -z $1 ]
+	then 
+		while getopts "er" opt; do
+			case "$opt" in
+			e)	editFile 
+	   			;; 
+			r)  readFile
+	    		;;
+			esac
+		done
+
+		shift $((OPTIND-1))
+		[ "$1" = "--" ] && shift
+	else
+		readFile
+fi
